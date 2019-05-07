@@ -1,14 +1,15 @@
 <template>
     <div id="header">
-        <h1><span style="color:#e03049;">U</span><span>PLAN</span></h1>
+        <h1><span style="color:#e03049;">U</span><span>BADGE</span></h1>
         <div class="menu">
-            <div>Maïa</div>
+            <div>{{user}}</div>
         </div>
     </div>
 </template>
 
 <script>
 export default {
+    props: ['user'],
 
 }
 </script>

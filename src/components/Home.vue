@@ -1,7 +1,9 @@
 <template>
 <div style="width: 100%;height: 100%;">
     <div v-if="is_login == 'admin'">
-        <Header />
+        <span @click="is_login = null" >Deconnexion</span>
+        <Header :user="user"/>
+
         <div id="dashboard" v-if="nav == 'home'">
             <Dashboard :entries="entries" />
             <div class="see-list">
@@ -68,10 +70,17 @@
             </div>
         </div>
     </div>
-    <div v-else>
+    <div v-if="is_login == 'eleve'">
+        <span @click="is_login = null" >Deconnexion</span>
+        <Header :user="user"/>
+        <Eleve />
+
+    </div>
+    <div v-if="is_login == null">
+        <Header :user="user"/>
         <div style="text-align: center; margin-top: 100px">Email</div>
         <div style="text-align: center">
-            <input type="text"  />
+            <input type="text"  v-model="user"/>
         </div>
         <div style="text-align: center">Mot de passe</div>
         <div style="text-align: center">
@@ -90,15 +99,18 @@
 <script>
     import Header from './Header.vue'
     import Dashboard from './Dashboard.vue'
+    import Eleve from './Eleve'
 
     export default {
         name: "Home",
         components: {
             Header,
-            Dashboard
+            Dashboard,
+            Eleve
         },
         data () {
             return {
+                user: '',
                 is_login: null,
                 classes: [
                     {

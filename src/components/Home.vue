@@ -1,8 +1,30 @@
 <template>
 <div style="width: 100%;height: 100%;">
     <Header />
-    <Dashboard :entries="entries" />
-    <div v-if="true">
+    <div id="dashboard" v-if="nav == 'home'">
+        <Dashboard :entries="entries" />
+        <div class="see-list">
+            <div class="see-list-header" style="font-weight:bold;">Voir liste</div>
+            <div>
+                <table style="width: 100%;margin-top: 20px;">
+                    <thead>
+                    <tr>
+                        <th>Classe</th>
+                        <th>Nombre présent</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="classe in classes" :key="classe.id">
+                        <td><a @click="nav = 'classe'">{{classe.label}}</a></td>
+                        <td>{{classe.present}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div v-if="nav == 'classe'">
+        <button v-on:click="nav = 'home'">Retour</button>
         <div>
             <h1>CLASSE A4</h1>
             <h3>DATE : 10/05/2019</h3>
@@ -32,11 +54,11 @@
             <modal name="edit-heures" >
                 <div style="text-align: center; margin-top: 100px">Heure d'arrivée</div>
                 <div style="text-align: center">
-                    <input type="text" v-model=form_modal.heure_arrive />
+                    <input type="datetime-local" v-model=form_modal.heure_arrive />
                 </div>
                 <div style="text-align: center">Heure de départ</div>
                 <div style="text-align: center">
-                    <input type="text" v-model=form_modal.heure_depart />
+                    <input type="datetime-local" v-model=form_modal.heure_depart />
                 </div>
                 <div style="text-align: center">
                     <button v-on:click="saveEdit(form_modal.id)">Sauvegarder</button>
@@ -59,88 +81,112 @@
         },
         data () {
             return {
+                classes: [
+                    {
+                        id: 1,
+                        label: "A4",
+                        present: "20/24"
+                    },
+                    {
+                        id: 2,
+                        label: "A3",
+                        present: "18/30"
+                    },
+                    {
+                        id: 3,
+                        label: "IT-START",
+                        present: "5/28"
+
+                    },
+                    {
+                        id: 4,
+                        label: "A5",
+                        present: "24/24"
+                    },
+                ],
+                nav: "home",
                 form_modal: {
                     id: '',
-                    heure_arrive: '',
-                    heure_depart: '',
+                    heure_arrive: null,
+                    heure_depart: null,
                 },
                 entries: [
                     {
                         id: 1,
                         nom: 'Lemoigne',
                         prenom: 'Clément',
-                        heure_arrive: null,
-                        heure_depart: 1557241260000,
-                        isArrived: false,
-                        variant_color_arrive: "green",
+                        heure_arrive: "2019-05-08T09:02",
+                        heure_depart: null,
+                        isArrived: true,
+                        variant_color_arrive: "red",
                         variant_color_depart: "green"
                     },
                     {
                         id: 2,
                         nom: 'Guillemette',
                         prenom: 'Florent',
-                        heure_arrive: 1557213300000,
-                        heure_depart: 1557241140000,
+                        heure_arrive: "2019-05-08T09:10",
+                        heure_depart: "2019-05-08T17:10",
                         isArrived: true,
-                        variant_color_arrive: "green",
+                        variant_color_arrive: "red",
                         variant_color_depart: "green"
                     },
                     {
                         id: 3,
                         nom: 'Jean',
                         prenom: 'Michel',
-                        heure_arrive: null,
-                        heure_depart: 1557241260000,
-                        isArrived: false,
+                        heure_arrive: "2019-05-08T09:10",
+                        heure_depart: "2019-05-08T16:10",
+                        isArrived: true,
                         variant_color_arrive: "red",
-                        variant_color_depart: "green"
-                    },
-                    {
-                        id: 3,
-                        nom: 'DA ROCHA',
-                        prenom: 'Alain',
-                        heure_arrive: null,
-                        heure_depart: 1557241260000,
-                        isArrived: false,
-                        variant_color_arrive: "green",
-                        variant_color_depart: "red",
+                        variant_color_depart: "red"
                     },
                     {
                         id: 4,
-                        nom: 'DE MATOS',
-                        prenom: 'Alexandra',
+                        nom: 'DA ROCHA',
+                        prenom: 'Alain',
                         heure_arrive: null,
-                        heure_depart: 1557241260000,
+                        heure_depart: null,
                         isArrived: false,
                         variant_color_arrive: "green",
                         variant_color_depart: "green",
                     },
                     {
                         id: 5,
-                        nom: 'HEROUX',
-                        prenom: 'Corentin',
-                        heure_arrive: null,
-                        heure_depart: 1557241260000,
-                        isArrived: false,
+                        nom: 'DE MATOS',
+                        prenom: 'Alexandra',
+                        heure_arrive: "2019-05-08T09:10",
+                        heure_depart: "2019-05-08T17:10",
+                        isArrived: true,
                         variant_color_arrive: "red",
                         variant_color_depart: "green",
                     },
                     {
                         id: 6,
-                        nom: 'TURQUETIL',
-                        prenom: 'Maxime',
+                        nom: 'HEROUX',
+                        prenom: 'Corentin',
                         heure_arrive: null,
-                        heure_depart: 1557241260000,
+                        heure_depart: null,
                         isArrived: false,
-                        variant_color_arrive: "red",
-                        variant_color_depart: "red",
+                        variant_color_arrive: "green",
+                        variant_color_depart: "green",
                     },
                     {
-                        id: 4,
+                        id: 7,
+                        nom: 'TURQUETIL',
+                        prenom: 'Maxime',
+                        heure_arrive: "2019-05-08T08:50",
+                        heure_depart: null,
+                        isArrived: true,
+                        variant_color_arrive: "green",
+                        variant_color_depart: "green",
+                    },
+                    {
+                        id: 8,
                         nom: 'Judith',
                         prenom: 'Lapu',
-                        heure_arrive: 1557213300000,
-                        heure_depart: 1557241140000,
+                        heure_arrive: "2019-05-08T09:10",
+                        heure_depart: "2019-05-08T17:18",
                         isArrived: true,
                         variant_color_arrive: "red",
                         variant_color_depart: "green"
@@ -156,8 +202,8 @@
             },
             openModal(entry) {
                 this.form_modal.id = entry.id
-                this.form_modal.heure_depart = entry.heure_depart ? this.getHourFromDate(entry.heure_depart) : ''
-                this.form_modal.heure_arrive = entry.heure_arrive ? this.getHourFromDate(entry.heure_arrive) : 'N/A'
+                this.form_modal.heure_depart = entry.heure_depart
+                this.form_modal.heure_arrive = entry.heure_arrive
                 this.$modal.show('edit-heures');
             },
             saveEdit(id) {
@@ -167,14 +213,14 @@
                        this.entries[i].heure_arrive = this.form_modal.heure_arrive
                        this.entries[i].heure_depart = this.form_modal.heure_depart
 
-                       if (this.entries[i].heure_arrive > 9.00) {
+                       if (this.entries[i].heure_arrive > "2019-05-08T09:00") {
                            this.entries[i].variant_color_arrive = "red"
                        }
                        else {
                            this.entries[i].variant_color_arrive = "green"
                        }
 
-                       if (this.entries[i].heure_depart >= 17.00) {
+                       if (this.entries[i].heure_depart >= "2019-05-08T17:00") {
                            this.entries[i].variant_color_depart = "green"
                        }
                        else {
@@ -190,5 +236,25 @@
 </script>
 
 <style scoped>
+    .see-list {
+        background-color: #FFFFFF;
+        width: 400px;
+        height: 400px;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 2px 4px 0px #00000050;
+        border-radius: 15px;
+        transform: scale(0.9);
+    }
 
+    .see-list-header {
+        font-size: 24px;
+        padding-top: 20px;
+    }
+    #dashboard {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
 </style>

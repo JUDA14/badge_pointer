@@ -2,8 +2,7 @@
     <div id="header">
         <h1><span style="color:#e03049;">U</span><span>PLAN</span></h1>
         <div class="menu">
-            <div>Connexion</div>
-            <div>Inscription</div>
+            <div>Maïa</div>
         </div>
     </div>
 </template>

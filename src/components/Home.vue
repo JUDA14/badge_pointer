@@ -1,70 +1,88 @@
 <template>
 <div style="width: 100%;height: 100%;">
-    <Header />
-    <div id="dashboard" v-if="nav == 'home'">
-        <Dashboard :entries="entries" />
-        <div class="see-list">
-            <div class="see-list-header" style="font-weight:bold;">Voir liste</div>
+    <div v-if="is_login == 'admin'">
+        <Header />
+        <div id="dashboard" v-if="nav == 'home'">
+            <Dashboard :entries="entries" />
+            <div class="see-list">
+                <div class="see-list-header" style="font-weight:bold;">Voir liste</div>
+                <div>
+                    <table style="width: 100%;margin-top: 20px;">
+                        <thead>
+                        <tr>
+                            <th>Classe</th>
+                            <th>Nombre présent</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="classe in classes" :key="classe.id">
+                            <td><a @click="nav = 'classe'; label_classe=classe.label">{{classe.label}}</a></td>
+                            <td>{{classe.present}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div v-if="nav == 'classe'">
+            <button v-on:click="nav = 'home'">Retour</button>
             <div>
-                <table style="width: 100%;margin-top: 20px;">
+                <h1>CLASSE {{label_classe}}</h1>
+                <h3>DATE : 10/05/2019</h3>
+            </div>
+            <div style="margin-left: auto; margin-right: auto; width: 400px; ">
+                <table>
                     <thead>
                     <tr>
-                        <th>Classe</th>
-                        <th>Nombre présent</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Heure arrivée</th>
+                        <th>Heure partie</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="classe in classes" :key="classe.id">
-                        <td><a @click="nav = 'classe'">{{classe.label}}</a></td>
-                        <td>{{classe.present}}</td>
-                    </tr>
+                        <tr v-for="entry in entries" :key="entry.id">
+                            <td>{{entry.nom}}</td>
+                            <td>{{entry.prenom}}</td>
+                            <td :style="{color: entry.variant_color_arrive}">{{ entry.heure_arrive ? getHourFromDate(entry.heure_arrive) : '' }}</td>
+                            <td :style="{color: entry.variant_color_depart}">{{ entry.heure_depart ? getHourFromDate(entry.heure_depart) : '' }}</td>
+                            <td>
+                                <button v-on:click="openModal(entry)">Modifier</button></td>
+                        </tr>
                     </tbody>
                 </table>
+
+                <modal name="edit-heures" >
+                    <div style="text-align: center; margin-top: 100px">Heure d'arrivée</div>
+                    <div style="text-align: center">
+                        <input type="datetime-local" v-model=form_modal.heure_arrive />
+                    </div>
+                    <div style="text-align: center">Heure de départ</div>
+                    <div style="text-align: center">
+                        <input type="datetime-local" v-model=form_modal.heure_depart />
+                    </div>
+                    <div style="text-align: center">
+                        <button v-on:click="saveEdit(form_modal.id)">Sauvegarder</button>
+                    </div>
+                </modal>
             </div>
         </div>
     </div>
-    <div v-if="nav == 'classe'">
-        <button v-on:click="nav = 'home'">Retour</button>
-        <div>
-            <h1>CLASSE A4</h1>
-            <h3>DATE : 10/05/2019</h3>
+    <div v-else>
+        <div style="text-align: center; margin-top: 100px">Email</div>
+        <div style="text-align: center">
+            <input type="text"  />
         </div>
-        <div style="margin-left: auto; margin-right: auto; width: 400px; ">
-            <table>
-                <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Heure arrivée</th>
-                    <th>Heure partie</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="entry in entries" :key="entry.id">
-                        <td>{{entry.nom}}</td>
-                        <td>{{entry.prenom}}</td>
-                        <td :style="{color: entry.variant_color_arrive}">{{ entry.heure_arrive ? getHourFromDate(entry.heure_arrive) : '' }}</td>
-                        <td :style="{color: entry.variant_color_depart}">{{ entry.heure_depart ? getHourFromDate(entry.heure_depart) : '' }}</td>
-                        <td>
-                            <button v-on:click="openModal(entry)">Modifier</button></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div style="text-align: center">Mot de passe</div>
+        <div style="text-align: center">
+            <input type="text"  />
+        </div>
+        <div style="text-align: center">Connectez vous en tant que :</div>
+        <div style="text-align: center">
+            <button v-on:click="is_login = 'admin'">ADMIN</button>
+            <button v-on:click="is_login = 'eleve'">ELEVE</button>
+        </div>
 
-            <modal name="edit-heures" >
-                <div style="text-align: center; margin-top: 100px">Heure d'arrivée</div>
-                <div style="text-align: center">
-                    <input type="datetime-local" v-model=form_modal.heure_arrive />
-                </div>
-                <div style="text-align: center">Heure de départ</div>
-                <div style="text-align: center">
-                    <input type="datetime-local" v-model=form_modal.heure_depart />
-                </div>
-                <div style="text-align: center">
-                    <button v-on:click="saveEdit(form_modal.id)">Sauvegarder</button>
-                </div>
-            </modal>
-        </div>
     </div>
 </div>
 </template>
@@ -81,6 +99,7 @@
         },
         data () {
             return {
+                is_login: null,
                 classes: [
                     {
                         id: 1,
@@ -104,6 +123,7 @@
                         present: "24/24"
                     },
                 ],
+                label_classe: '',
                 nav: "home",
                 form_modal: {
                     id: '',
@@ -256,5 +276,6 @@
         display: flex;
         align-items: center;
         justify-content: space-around;
+        margin-top: 50px;
     }
 </style>

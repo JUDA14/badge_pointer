@@ -23,15 +23,55 @@
                     </tr>
                 </tbody>
             </table>
+            <canvas id="planet-chart"></canvas>
         </div>
     </div>
 </template>
 
 <script>
+    import Chart from 'chart.js';
+    export const planetChartData = {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    }
+
     export default {
         name: "Home",
         data () {
             return {
+                planetChartData: planetChartData,
                 entries: [
                     {
                         id: 1,
@@ -47,7 +87,20 @@
                         heure_arrive: '9H10',
                         heure_depart: "17H04"
                     },
-                ]
+                ],
+            }
+        },
+        created (){
+            this.createChart('planet-chart', this.planetChartData)
+        },
+        methods: {
+            createChart(chartId, chartData) {
+                const ctx = document.getElementById(chartId);
+                new Chart(ctx, {
+                    type: chartData.type,
+                    data: chartData.data,
+                    options: chartData.options,
+                })
             }
         }
     }

@@ -4,7 +4,7 @@
             <h1>CLASSE A4</h1>
             <h3>DATE : 10/05/2019</h3>
         </div>
-        <div>
+        <div style="margin-left: auto; margin-right: auto; width: 400px; ">
             <table>
                 <thead>
                 <tr>
@@ -25,10 +25,18 @@
                     </tr>
                 </tbody>
             </table>
-            <modal name="edit-heures">
-                <input type="text" v-model=form_modal.heure_arrive />
-                <input type="text" v-model=form_modal.heure_depart />
-                <button v-on:click="saveEdit(form_modal.id)">Sauvegarder</button>
+            <modal name="edit-heures" >
+                <div style="text-align: center; margin-top: 100px">Heure d'arrivée</div>
+                <div style="text-align: center">
+                    <input type="text" v-model=form_modal.heure_arrive />
+                </div>
+                <div style="text-align: center">Heure de départ</div>
+                <div style="text-align: center">
+                    <input type="text" v-model=form_modal.heure_depart />
+                </div>
+                <div style="text-align: center">
+                    <button v-on:click="saveEdit(form_modal.id)">Sauvegarder</button>
+                </div>
             </modal>
         </div>
     </div>
@@ -58,10 +66,46 @@
                         id: 2,
                         nom: 'Guillemette',
                         prenom: 'Florent',
-                        heure_arrive: 9.10,
+                        heure_arrive: 9.11,
                         heure_depart: 17.04,
                         variant_color_arrive: "red",
                         variant_color_depart: "green",
+                    },
+                    {
+                        id: 3,
+                        nom: 'DA ROCHA',
+                        prenom: 'Alain',
+                        heure_arrive: 8.35,
+                        heure_depart: 16.50,
+                        variant_color_arrive: "green",
+                        variant_color_depart: "red",
+                    },
+                    {
+                        id: 4,
+                        nom: 'DE MATOS',
+                        prenom: 'Alexandra',
+                        heure_arrive: 9.00,
+                        heure_depart: 17.00,
+                        variant_color_arrive: "green",
+                        variant_color_depart: "green",
+                    },
+                    {
+                        id: 5,
+                        nom: 'HEROUX',
+                        prenom: 'Corentin',
+                        heure_arrive: 9.01,
+                        heure_depart: 17.02,
+                        variant_color_arrive: "red",
+                        variant_color_depart: "green",
+                    },
+                    {
+                        id: 6,
+                        nom: 'TURQUETIL',
+                        prenom: 'Maxime',
+                        heure_arrive: 10.14,
+                        heure_depart: 16.55,
+                        variant_color_arrive: "red",
+                        variant_color_depart: "red",
                     },
                 ],
             }
@@ -92,7 +136,7 @@
                            this.entries[i].variant_color_arrive = "green"
                        }
 
-                       if (this.entries[i].heure_depart > 17.00) {
+                       if (this.entries[i].heure_depart >= 17.00) {
                            this.entries[i].variant_color_depart = "green"
                        }
                        else {

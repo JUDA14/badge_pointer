@@ -2,7 +2,7 @@
 <div style="width: 100%;height: 100%;">
     <Header />
     <Dashboard :entries="entries" />
-    <div v-if="false">
+    <div v-if="true">
         <div>
             <h1>CLASSE A4</h1>
             <h3>DATE : 10/05/2019</h3>
@@ -22,15 +22,15 @@
                         <td>{{entry.nom}}</td>
                         <td>{{entry.prenom}}</td>
                         <td :style="{color: entry.variant_color_arrive}">{{ entry.heure_arrive ? getHourFromDate(entry.heure_arrive) : '' }}</td>
-                        <td :style="{color: entry.variant_color_depart}">{{ entry.heure_arrive ? getHourFromDate(entry.heure_depart) : '' }}</td>
+                        <td :style="{color: entry.variant_color_depart}">{{ entry.heure_depart ? getHourFromDate(entry.heure_depart) : '' }}</td>
                         <td>
                             <button v-on:click="openModal(entry)">Modifier</button></td>
                     </tr>
                 </tbody>
             </table>
             <modal name="edit-heures">
-                <input type="text" v-model=form_modal.heure_arrive />
-                <input type="text" v-model=form_modal.heure_depart />
+                <input type="text" v-model="form_modal.heure_arrive" />
+                <input type="text" v-model="form_modal.heure_depart" />
                 <button v-on:click="saveEdit(form_modal.id)">Sauvegarder</button>
             </modal>
         </div>
@@ -99,20 +99,17 @@
                 ]
             }
         },
-        methods: {
-            getHourFromDate (date) {
-                return `${new Date(date).getHours()}h${new Date(date).getMinutes()}`
-            }
-        },
-
         created (){
 
         },
         methods: {
+            getHourFromDate (date) {
+                return `${new Date(date).getHours()}h${new Date(date).getMinutes().toString().padStart(2, '0')}`
+            },
             openModal(entry) {
                 this.form_modal.id = entry.id
-                this.form_modal.heure_depart = entry.heure_depart
-                this.form_modal.heure_arrive = entry.heure_arrive
+                this.form_modal.heure_depart = entry.heure_depart ? this.getHourFromDate(entry.heure_depart) : ''
+                this.form_modal.heure_arrive = entry.heure_arrive ? this.getHourFromDate(entry.heure_arrive) : 'N/A'
                 this.$modal.show('edit-heures');
             },
             saveEdit(id) {

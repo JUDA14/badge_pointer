@@ -60,7 +60,7 @@ export default {
             return this.entries.sort(function(x, y) { return x.isArrived - y.isArrived })
         },
         getHourFromDate (date) {
-            return `${new Date(date).getHours()}h${new Date(date).getMinutes()}`
+            return `${new Date(date).getHours()}h${new Date(date).getMinutes().toString().padStart(2, '0')}`
         }
     }
 }

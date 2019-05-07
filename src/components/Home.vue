@@ -18,8 +18,8 @@
                     <tr v-for="entry in entries" :key="entry.id">
                         <td>{{entry.nom}}</td>
                         <td>{{entry.prenom}}</td>
-                        <td>{{entry.heure_arrive}}</td>
-                        <td>{{entry.heure_depart}}</td>
+                        <td :style="{color: entry.variant_color_arrive}">{{entry.heure_arrive}}H</td>
+                        <td :style="{color: entry.variant_color_depart}">{{entry.heure_depart}}H</td>
                         <td>
                             <button v-on:click="openModal(entry)">Modifier</button></td>
                     </tr>
@@ -49,19 +49,24 @@
                         id: 1,
                         nom: 'Lemoigne',
                         prenom: 'Clément',
-                        heure_arrive: '8H45',
-                        heure_depart: "17H01"
+                        heure_arrive: 8.45,
+                        heure_depart: 17.01,
+                        variant_color_arrive: "green",
+                        variant_color_depart: "green",
                     },
                     {
                         id: 2,
                         nom: 'Guillemette',
                         prenom: 'Florent',
-                        heure_arrive: '9H10',
-                        heure_depart: "17H04"
+                        heure_arrive: 9.10,
+                        heure_depart: 17.04,
+                        variant_color_arrive: "red",
+                        variant_color_depart: "green",
                     },
                 ],
             }
         },
+
         created (){
 
         },
@@ -79,6 +84,20 @@
 
                        this.entries[i].heure_arrive = this.form_modal.heure_arrive
                        this.entries[i].heure_depart = this.form_modal.heure_depart
+
+                       if (this.entries[i].heure_arrive > 9.00) {
+                           this.entries[i].variant_color_arrive = "red"
+                       }
+                       else {
+                           this.entries[i].variant_color_arrive = "green"
+                       }
+
+                       if (this.entries[i].heure_depart > 17.00) {
+                           this.entries[i].variant_color_depart = "green"
+                       }
+                       else {
+                           this.entries[i].variant_color_depart = "red"
+                       }
 
                    }
                 }

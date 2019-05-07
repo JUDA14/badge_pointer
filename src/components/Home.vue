@@ -20,11 +20,16 @@
                         <td>{{entry.prenom}}</td>
                         <td>{{entry.heure_arrive}}</td>
                         <td>{{entry.heure_depart}}</td>
-                        <td @click="openModal"> Modifier</td>
+                        <td>
+                            <button v-on:click="openModal(entry)">Modifier</button></td>
                     </tr>
                 </tbody>
             </table>
-            <canvas id="planet-chart"></canvas>
+            <modal name="edit-heures">
+                <input type="text" v-model=form_modal.heure_arrive />
+                <input type="text" v-model=form_modal.heure_depart />
+                <button v-on:click="saveEdit(form_modal.id)">Sauvegarder</button>
+            </modal>
         </div>
     </div>
 </template>
@@ -34,6 +39,11 @@
         name: "Home",
         data () {
             return {
+                form_modal: {
+                    id: '',
+                    heure_arrive: '',
+                    heure_depart: '',
+                },
                 entries: [
                     {
                         id: 1,
@@ -56,9 +66,24 @@
 
         },
         methods: {
-            openModal() {
-                
-            }
+            openModal(entry) {
+                this.form_modal.id = entry.id
+                this.form_modal.heure_depart = entry.heure_depart
+                this.form_modal.heure_arrive = entry.heure_arrive
+                this.$modal.show('edit-heures');
+            },
+            saveEdit(id) {
+
+                for (var i = 0; i < this.entries.length; i++) {
+                   if (this.entries[i].id == id ) {
+
+                       this.entries[i].heure_arrive = this.form_modal.heure_arrive
+                       this.entries[i].heure_depart = this.form_modal.heure_depart
+
+                   }
+                }
+                this.$modal.hide('edit-heures');
+            },
         }
     }
 </script>

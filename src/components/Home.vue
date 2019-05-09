@@ -1,5 +1,5 @@
 <template>
-<div style="width: 100%;height: 100%; background-color: #110230!important;">
+<div style="background-color: #110230!important;">
     <div v-if="is_login == 'admin'">
         <span class="text" @click="is_login = null" >Deconnexion</span>
         <Header :user="user"/>
@@ -95,6 +95,7 @@
 
     </div>
     <button v-shortkey="[ 'ctrl' ]" @shortkey="addEntry()" hidden></button>
+    <button v-shortkey="[ 'alt' ]" @shortkey="addDepart()" hidden></button>
 </div>
 </template>
 
@@ -149,7 +150,7 @@
                         id: 1,
                         nom: 'Lemoigne',
                         prenom: 'Clément',
-                        heure_arrive: "2019-05-08T09:02",
+                        heure_arrive: "2019-05-10T09:02",
                         heure_depart: null,
                         isArrived: true,
                         variant_color_arrive: "red",
@@ -159,8 +160,8 @@
                         id: 2,
                         nom: 'Guillemette',
                         prenom: 'Florent',
-                        heure_arrive: "2019-05-08T09:10",
-                        heure_depart: "2019-05-08T17:10",
+                        heure_arrive: "2019-05-10T09:10",
+                        heure_depart: "2019-05-10T17:10",
                         isArrived: true,
                         variant_color_arrive: "red",
                         variant_color_depart: "green"
@@ -169,8 +170,8 @@
                         id: 3,
                         nom: 'Jean',
                         prenom: 'Michel',
-                        heure_arrive: "2019-05-08T09:10",
-                        heure_depart: "2019-05-08T16:10",
+                        heure_arrive: "2019-05-10T09:10",
+                        heure_depart: "2019-05-10T16:10",
                         isArrived: true,
                         variant_color_arrive: "red",
                         variant_color_depart: "red"
@@ -189,8 +190,8 @@
                         id: 5,
                         nom: 'DE MATOS',
                         prenom: 'Alexandra',
-                        heure_arrive: "2019-05-08T09:10",
-                        heure_depart: "2019-05-08T17:10",
+                        heure_arrive: "2019-05-10T09:10",
+                        heure_depart: "2019-05-10T17:10",
                         isArrived: true,
                         variant_color_arrive: "red",
                         variant_color_depart: "green",
@@ -209,7 +210,7 @@
                         id: 7,
                         nom: 'TURQUETIL',
                         prenom: 'Maxime',
-                        heure_arrive: "2019-05-08T08:50",
+                        heure_arrive: "2019-05-10T08:50",
                         heure_depart: null,
                         isArrived: true,
                         variant_color_arrive: "green",
@@ -219,8 +220,8 @@
                         id: 8,
                         nom: 'Judith',
                         prenom: 'Lapu',
-                        heure_arrive: "2019-05-08T09:10",
-                        heure_depart: "2019-05-08T17:18",
+                        heure_arrive: "2019-05-10T09:10",
+                        heure_depart: "2019-05-10T17:18",
                         isArrived: true,
                         variant_color_arrive: "red",
                         variant_color_depart: "green"
@@ -231,32 +232,23 @@
                         id: 9,
                         nom: 'Dupont',
                         prenom: 'Corinne',
-                        heure_arrive: "2019-05-08T09:01",
+                        heure_arrive: null,
                         heure_depart: null,
                         isArrived: true,
-                        variant_color_arrive: "green",
-                        variant_color_depart: "green"
+                        variant_color_arrive: "red",
+                        variant_color_depart: "red"
                     },
                     {
                         id: 10,
                         nom: 'Doe',
                         prenom: 'John',
-                        heure_arrive: "2019-05-08T09:02",
+                        heure_arrive: null,
                         heure_depart: null,
                         isArrived: true,
                         variant_color_arrive: "red",
-                        variant_color_depart: "green"
-                    },
-                    {
-                        id: 11,
-                        nom: 'Jean',
-                        prenom: 'Jacques',
-                        heure_arrive: "2019-05-08T09:05",
-                        heure_depart: null,
-                        isArrived: true,
-                        variant_color_arrive: "red",
-                        variant_color_depart: "green"
-                    },
+                        variant_color_depart: "red"
+                    }
+
                 ]
 
             }
@@ -270,8 +262,18 @@
             },
             addEntry () {
                 if (this.entries_new.length !== 0) {
+                    this.entries_new[0].heure_arrive = new Date(Date.now())
+
                     this.entries.push(this.entries_new[0])
+
                     this.entries_new.shift()
+                }
+
+            },
+            addDepart () {
+                if (this.entries.length !== 0) {
+
+                    this.entries[this.entries.length - 1].heure_depart = new Date(Date.now())
                 }
             },
             getHourFromDate (date) {
@@ -290,14 +292,14 @@
                        this.entries[i].heure_arrive = this.form_modal.heure_arrive
                        this.entries[i].heure_depart = this.form_modal.heure_depart
 
-                       if (this.entries[i].heure_arrive > "2019-05-08T09:00") {
+                       if (this.entries[i].heure_arrive > "2019-05-10T09:00") {
                            this.entries[i].variant_color_arrive = "red"
                        }
                        else {
                            this.entries[i].variant_color_arrive = "green"
                        }
 
-                       if (this.entries[i].heure_depart >= "2019-05-08T17:00") {
+                       if (this.entries[i].heure_depart >= "2019-05-10T17:00") {
                            this.entries[i].variant_color_depart = "green"
                        }
                        else {

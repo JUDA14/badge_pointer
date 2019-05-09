@@ -94,7 +94,7 @@
         </div>
 
     </div>
-    <button v-shortkey="[ 'ctrl' ]" @shortkey="addEntrie()" hidden></button>
+    <button v-shortkey="[ 'ctrl' ]" @shortkey="addEntry()" hidden></button>
 </div>
 </template>
 
@@ -231,7 +231,7 @@
                         id: 9,
                         nom: 'Dupont',
                         prenom: 'Corinne',
-                        heure_arrive: "2019-05-08T08:55",
+                        heure_arrive: "2019-05-08T09:01",
                         heure_depart: null,
                         isArrived: true,
                         variant_color_arrive: "green",
@@ -247,7 +247,16 @@
                         variant_color_arrive: "red",
                         variant_color_depart: "green"
                     },
-
+                    {
+                        id: 11,
+                        nom: 'Jean',
+                        prenom: 'Jacques',
+                        heure_arrive: "2019-05-08T09:05",
+                        heure_depart: null,
+                        isArrived: true,
+                        variant_color_arrive: "red",
+                        variant_color_depart: "green"
+                    },
                 ]
 
             }
@@ -257,20 +266,13 @@
         },
         methods: {
             sendPdf () {
-                fetch('http://localhost:3001/registration').then((response) => {
-                    console.log(response)
-                }).catch((error) => {
-                    console.log(error)
-                })
+                fetch('http://localhost:3001/registration')
             },
-            addEntrie () {
-                for (var i = 0; i < this.entries_new.length; i++) {
-                    if (!this.entries.includes(this.entries_new[i])){
-                        this.entries.push(this.entries_new[i])
-                        break;
-                    }
+            addEntry () {
+                if (this.entries_new.length !== 0) {
+                    this.entries.push(this.entries_new[0])
+                    this.entries_new.shift()
                 }
-
             },
             getHourFromDate (date) {
                 return `${new Date(date).getHours()}h${new Date(date).getMinutes().toString().padStart(2, '0')}`

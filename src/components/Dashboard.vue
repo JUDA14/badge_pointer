@@ -12,7 +12,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="entry in sortedEntries" v-if="!entry.isArrived || entry.heure_arrive > heureLimite" :key="entry.id">
+                    <tr v-for="entry in sortedEntries" :key="entry.id">
                         <td>{{ entry.nom }}</td>
                         <td>{{ entry.prenom }}</td>
                         <td>{{ entry.heure_arrive ? getHourFromDate(entry.heure_arrive) : '' }}</td>
@@ -32,7 +32,8 @@ export default {
             return "2019-05-08T09:00"
         },
         sortedEntries () {
-            return this.entries.sort(function(x, y) { return x.isArrived - y.isArrived })
+            const sortedEntries = this.entries.sort(function(x, y) { return x.isArrived - y.isArrived })
+            return sortedEntries.filter((entry) => !entry.isArrived || entry.heure_arrive > this.heureLimite) 
         }
     },
     data () {
@@ -65,6 +66,7 @@ export default {
         box-shadow: 0px 2px 4px 0px #00000050;
         border-radius: 15px;
         transform: scale(1.1);
+        overflow: auto;
     }
 
     .today-header {

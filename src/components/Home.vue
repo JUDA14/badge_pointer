@@ -1,5 +1,5 @@
 <template>
-<div style="width: 100%;height: 100%; background-color: #110230!important; align-items: center;justify-content: center; display: flex">
+<div style="width: 100%;height: 110%; background-color: #110230!important; align-items: center;justify-content: center; display: flex">
     <div v-if="is_login == 'admin'">
         <span class="text" @click="is_login = null" >Deconnexion</span>
         <Header :user="user"/>

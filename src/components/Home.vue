@@ -1,9 +1,11 @@
 <template>
-<div style="width: 100%;height: 110%; background-color: #110230!important; align-items: center;justify-content: center; display: flex">
-    <div v-if="is_login == 'admin'">
-        <b-button variant="danger" @click="is_login = null" >
-        <span class="text" >Deconnexion</span>
-        </b-button>
+<div style="width: 100%;height: 110%; background-color: #110230!important; align-items: center;justify-content: center; display: flex; width: 100%">
+    <div v-if="is_login == 'admin'" >
+        <div style= "width: 100%; justify-content: flex-end; display: flex">
+            <b-button variant="danger" @click="is_login = null"  >
+                <span class="text" >Deconnexion</span>
+            </b-button>
+        </div>
         <Header :user="user"/>
 
         <div id="dashboard" v-if="nav == 'home'">
@@ -74,9 +76,11 @@
         </div>
     </div>
     <div v-if="is_login == 'eleve'">
-        <b-button variant="danger" @click="is_login = null">
-        <span  >Deconnexion</span>
-        </b-button>
+        <div style= "width: 100%; justify-content: flex-end; display: flex">
+            <b-button variant="danger" @click="is_login = null">
+                <span  >Deconnexion</span>
+            </b-button>
+        </div>
         <Header :user="user"/>
         <Eleve />
 

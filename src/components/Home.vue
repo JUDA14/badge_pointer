@@ -89,8 +89,8 @@
         </div>
         <div class="text" style="text-align: center">Connectez vous en tant que :</div>
         <div style="text-align: center">
-            <button v-on:click="is_login = 'admin'">ADMIN</button>
-            <button v-on:click="is_login = 'eleve'">ELEVE</button>
+            <b-button v-on:click="is_login = 'admin'">ADMIN</b-button>
+            <b-button v-on:click="is_login = 'eleve'">ELEVE</b-button>
         </div>
 
     </div>

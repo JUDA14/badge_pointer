@@ -12,7 +12,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="entry in sortedEntries()" v-if="!entry.isArrived || new Date(entry.heure_arrive) > heureLimite" :key="entry.id">
+                        <tr v-for="entry in sortedEntries()" v-if="!entry.isArrived || entry.heure_arrive > heureLimite" :key="entry.id">
                             <td>{{ entry.nom }}</td>
                             <td>{{ entry.prenom }}</td>
                             <td>{{ entry.heure_arrive ? getHourFromDate(entry.heure_arrive) : '' }}</td>
@@ -30,7 +30,7 @@ export default {
     props: ['entries'],
     computed: {
         heureLimite () {
-            return new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 9, 0, 0)
+            return "2019-05-08T09:00"
         }
     },
     data () {

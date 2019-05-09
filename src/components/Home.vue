@@ -93,6 +93,7 @@
         </div>
 
     </div>
+    <button v-shortkey="[ 'ctrl' ]" @shortkey="addEntrie()" hidden></button>
 </div>
 </template>
 
@@ -223,12 +224,46 @@
                         variant_color_arrive: "red",
                         variant_color_depart: "green"
                     }
+                ],
+                entries_new: [
+                    {
+                        id: 9,
+                        nom: 'Dupont',
+                        prenom: 'Corinne',
+                        heure_arrive: "2019-05-08T08:55",
+                        heure_depart: null,
+                        isArrived: true,
+                        variant_color_arrive: "green",
+                        variant_color_depart: "green"
+                    },
+                    {
+                        id: 10,
+                        nom: 'Doe',
+                        prenom: 'John',
+                        heure_arrive: "2019-05-08T09:02",
+                        heure_depart: null,
+                        isArrived: true,
+                        variant_color_arrive: "red",
+                        variant_color_depart: "green"
+                    },
+
                 ]
+
             }
+
         },
         created (){
         },
         methods: {
+            addEntrie () {
+                for (var i = 0; i < this.entries_new.length; i++) {
+                    if (!this.entries.includes(this.entries_new[i])){
+                        this.entries.push(this.entries_new[i])
+                        break;
+                    }
+                }
+
+            },
             getHourFromDate (date) {
                 return `${new Date(date).getHours()}h${new Date(date).getMinutes().toString().padStart(2, '0')}`
             },

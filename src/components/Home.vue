@@ -1,5 +1,5 @@
 <template>
-<div style="width: 100%;height: 100%; background-color: #110230!important;">
+<div style="width: 100%;height: 100%; background-color: #110230!important; align-items: center;justify-content: center; display: flex">
     <div v-if="is_login == 'admin'">
         <span class="text" @click="is_login = null" >Deconnexion</span>
         <Header :user="user"/>
@@ -77,23 +77,30 @@
         <Eleve />
 
     </div>
-    <div v-if="is_login == null" >
+
+
+
+    <div v-if="is_login == null" style="align-items: center; width : 300px; padding">
         <Header :user="user"/>
-        <div class="text">Email</div>
-        <div style="text-align: center">
+        <div class="text" style="text-align: center; margin-top: 100px; margin: 15px">Email</div>
+        <div style="text-align: center; padding-horizontal: 50px" >
             <b-input type="text"  v-model="user"/>
         </div>
-        <div class="text" style="text-align: center">Mot de passe</div>
-        <div>
+        <div class="text" style="text-align: center; margin: 15px">Mot de passe</div>
+        <div style="text-align: center">
             <b-input type="text"  />
         </div>
-        <div class="text" style="text-align: center">Connectez vous en tant que :</div>
+        <div class="text" style="text-align: center; margin-top: 20px; margin-bottom: 15px">Connectez vous en tant que :</div>
         <div style="text-align: center">
-            <b-button class="m-1" v-on:click="is_login = 'admin'">ADMIN</b-button>
-            <b-button class="m-1" v-on:click="is_login = 'eleve'">ELEVE</b-button>
+            <b-button v-on:click="is_login = 'admin' " variant ='primary' style="margin-right: 10px">ADMIN</b-button>
+            <b-button v-on:click="is_login = 'eleve'" variant ='primary' style="margin-left: 10px">ELEVE</b-button>
+            
         </div>
 
     </div>
+
+
+
     <button v-shortkey="[ 'ctrl' ]" @shortkey="addEntry()" hidden></button>
 </div>
 </template>

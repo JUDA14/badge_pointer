@@ -1,28 +1,27 @@
 <template>
-        <div class="today">
-            <div class="today-header" style="font-weight:bold;">Aujourd'hui</div>
-            <div>
-                <table style="width: 100%;margin-top: 20px;">
-                    <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Heure d'arrivée</th>
-                        <th>Est arrivé ?</th>
+    <div class="today">
+        <div class="today-header" style="font-weight:bold;">Aujourd'hui</div>
+        <div>
+            <table style="width: 100%;margin-top: 20px;">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Heure d'arrivée</th>
+                    <th>Est arrivé ?</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="entry in sortedEntries" v-if="!entry.isArrived || entry.heure_arrive > heureLimite" :key="entry.id">
+                        <td>{{ entry.nom }}</td>
+                        <td>{{ entry.prenom }}</td>
+                        <td>{{ entry.heure_arrive ? getHourFromDate(entry.heure_arrive) : '' }}</td>
+                        <td :style="entry.isArrived ? 'color: green': 'color: red'"><i class="material-icons">{{entry.isArrived ? 'check_circle' : 'cancel' }}</i></td>
                     </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="entry in sortedEntries()" v-if="!entry.isArrived || entry.heure_arrive > heureLimite" :key="entry.id">
-                            <td>{{ entry.nom }}</td>
-                            <td>{{ entry.prenom }}</td>
-                            <td>{{ entry.heure_arrive ? getHourFromDate(entry.heure_arrive) : '' }}</td>
-                            <td :style="entry.isArrived ? 'color: green': 'color: red'"><i class="material-icons">{{entry.isArrived ? 'check_circle' : 'cancel' }}</i></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
-
+    </div>
 </template>
 
 <script>

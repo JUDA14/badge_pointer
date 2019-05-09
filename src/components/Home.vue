@@ -31,6 +31,7 @@
             <div>
                 <h1>CLASSE {{label_classe}}</h1>
                 <h3>DATE : 10/05/2019</h3>
+                <button @click="sendPdf()">Envoyer le PDF</button>
             </div>
             <div style="margin-left: auto; margin-right: auto; width: 400px; ">
                 <table>
@@ -255,6 +256,13 @@
         created (){
         },
         methods: {
+            sendPdf () {
+                fetch('http://localhost:3001/registration').then((response) => {
+                    console.log(response)
+                }).catch((error) => {
+                    console.log(error)
+                })
+            },
             addEntrie () {
                 for (var i = 0; i < this.entries_new.length; i++) {
                     if (!this.entries.includes(this.entries_new[i])){

@@ -31,6 +31,9 @@ export default {
     computed: {
         heureLimite () {
             return "2019-05-08T09:00"
+        },
+        sortedEntries () {
+            return this.entries.sort(function(x, y) { return x.isArrived - y.isArrived })
         }
     },
     data () {
@@ -39,9 +42,6 @@ export default {
         }
     },
     methods: {
-        sortedEntries () {
-            return this.entries.sort(function(x, y) { return x.isArrived - y.isArrived })
-        },
         getHourFromDate (date) {
             return `${new Date(date).getHours()}h${new Date(date).getMinutes().toString().padStart(2, '0')}`
         }

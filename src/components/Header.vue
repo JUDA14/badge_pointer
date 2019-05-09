@@ -1,7 +1,7 @@
 <template >
     <div id="header" >
         <h1 class="text"><span style="color:#e03049;">U</span><span class="text">BADGE</span></h1>
-        <div class="menu text">
+        <div v-if="login !== true" class="menu text">
             <div>{{user}}</div>
         </div>
     </div>
@@ -9,7 +9,8 @@
 
 <script>
 export default {
-    props: ['user'],
+    props: ['user', 'login'],
+
 
 }
 </script>

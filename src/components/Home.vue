@@ -86,7 +86,7 @@
 
     <div v-if="is_login == null" style="align-items: center; width : 300px; padding" >
         <div style="padding: 35px; " >
-        <Header :user="user"/>
+        <Header :user="user" :login='true'/>
         </div>
 
         <div class="text" style="text-align: center; margin-top: 100px; margin: 15px">Email</div>

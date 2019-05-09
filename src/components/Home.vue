@@ -1,7 +1,9 @@
 <template>
 <div style="width: 100%;height: 110%; background-color: #110230!important; align-items: center;justify-content: center; display: flex">
     <div v-if="is_login == 'admin'">
-        <span class="text" @click="is_login = null" >Deconnexion</span>
+        <b-button variant="danger" @click="is_login = null" >
+        <span class="text" >Deconnexion</span>
+        </b-button>
         <Header :user="user"/>
 
         <div id="dashboard" v-if="nav == 'home'">
@@ -72,7 +74,9 @@
         </div>
     </div>
     <div v-if="is_login == 'eleve'">
-        <span @click="is_login = null" >Deconnexion</span>
+        <b-button variant="danger" @click="is_login = null">
+        <span  >Deconnexion</span>
+        </b-button>
         <Header :user="user"/>
         <Eleve />
 

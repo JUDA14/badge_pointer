@@ -1,7 +1,7 @@
 <template>
 <div style="width: 100%;height: 100%; background-color: #110230!important;">
     <div v-if="is_login == 'admin'">
-        <span @click="is_login = null" >Deconnexion</span>
+        <span class="text" @click="is_login = null" >Deconnexion</span>
         <Header :user="user"/>
 
         <div id="dashboard" v-if="nav == 'home'">
@@ -27,17 +27,17 @@
             </div>
         </div>
         <div v-if="nav == 'classe'">
-            <button v-on:click="nav = 'home'">Retour</button>
+            <b-button v-on:click="nav = 'home'">Retour</b-button>
             <div>
-                <h1>CLASSE {{label_classe}}</h1>
-                <h3>DATE : 10/05/2019</h3>
-                <button @click="sendPdf()">Envoyer le PDF</button>
+                <h1 class="text">CLASSE {{label_classe}}</h1>
+                <h3 class="text">DATE : 10/05/2019</h3>
+                <b-button @click="sendPdf()">Envoyer le PDF</b-button>
             </div>
             <div style="margin-left: auto; margin-right: auto; width: 400px; ">
-                <table>
+                <table class="text">
                     <thead>
                     <tr>
-                        <th>Nom</th>
+                        <th >Nom</th>
                         <th>Prénom</th>
                         <th>Heure arrivée</th>
                         <th>Heure partie</th>
@@ -50,22 +50,22 @@
                             <td :style="{color: entry.variant_color_arrive}">{{ entry.heure_arrive ? getHourFromDate(entry.heure_arrive) : '' }}</td>
                             <td :style="{color: entry.variant_color_depart}">{{ entry.heure_depart ? getHourFromDate(entry.heure_depart) : '' }}</td>
                             <td>
-                                <button v-on:click="openModal(entry)">Modifier</button></td>
+                                <b-button v-on:click="openModal(entry)">Modifier</b-button></td>
                         </tr>
                     </tbody>
                 </table>
 
                 <modal name="edit-heures" >
-                    <div style="text-align: center; margin-top: 100px">Heure d'arrivée</div>
+                    <div style="text-align: center; margin-top: 50px">Heure d'arrivée</div>
                     <div style="text-align: center">
-                        <input type="datetime-local" v-model=form_modal.heure_arrive />
+                        <b-input type="datetime-local" v-model=form_modal.heure_arrive />
                     </div>
                     <div style="text-align: center">Heure de départ</div>
                     <div style="text-align: center">
-                        <input type="datetime-local" v-model=form_modal.heure_depart />
+                        <b-input type="datetime-local" v-model=form_modal.heure_depart />
                     </div>
-                    <div style="text-align: center">
-                        <button v-on:click="saveEdit(form_modal.id)">Sauvegarder</button>
+                    <div style="text-align: center; margin-top: 10px">
+                        <b-button v-on:click="saveEdit(form_modal.id)">Sauvegarder</b-button>
                     </div>
                 </modal>
             </div>
@@ -77,20 +77,20 @@
         <Eleve />
 
     </div>
-    <div v-if="is_login == null">
+    <div v-if="is_login == null" >
         <Header :user="user"/>
-        <div class="text" style="text-align: center; margin-top: 100px">Email</div>
+        <div class="text">Email</div>
         <div style="text-align: center">
-            <input type="text"  v-model="user"/>
+            <b-input type="text"  v-model="user"/>
         </div>
         <div class="text" style="text-align: center">Mot de passe</div>
-        <div style="text-align: center">
-            <input type="text"  />
+        <div>
+            <b-input type="text"  />
         </div>
         <div class="text" style="text-align: center">Connectez vous en tant que :</div>
         <div style="text-align: center">
-            <b-button v-on:click="is_login = 'admin'">ADMIN</b-button>
-            <b-button v-on:click="is_login = 'eleve'">ELEVE</b-button>
+            <b-button class="m-1" v-on:click="is_login = 'admin'">ADMIN</b-button>
+            <b-button class="m-1" v-on:click="is_login = 'eleve'">ELEVE</b-button>
         </div>
 
     </div>
@@ -317,7 +317,7 @@
     .see-list {
         background-color: #FFFFFF;
         width: 400px;
-        height: 400px;
+        height: 500px;
         border: 1px solid rgba(0, 0, 0, 0.3);
         box-shadow: 0px 2px 4px 0px #00000050;
         border-radius: 15px;

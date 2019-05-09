@@ -1,7 +1,7 @@
 <template>
     <div id="header">
-        <h1><span style="color:#e03049;">U</span><span>BADGE</span></h1>
-        <div class="menu">
+        <h1 class="text"><span style="color:#e03049;">U</span><span class="text">BADGE</span></h1>
+        <div class="menu text">
             <div>{{user}}</div>
         </div>
     </div>
@@ -35,5 +35,10 @@ export default {
 
 #header .menu div:not(:first-of-type) {
     margin-left: 30px;
+}
+.text {
+    font-family: open sans,Arial,sans-serif;
+    line-height: 1.7em;
+    color: white;
 }
 </style>

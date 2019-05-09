@@ -1,5 +1,5 @@
 <template>
-<div style="width: 100%;height: 100%;">
+<div style="width: 100%;height: 100%; background-color: #110230!important;">
     <div v-if="is_login == 'admin'">
         <span @click="is_login = null" >Deconnexion</span>
         <Header :user="user"/>
@@ -79,15 +79,15 @@
     </div>
     <div v-if="is_login == null">
         <Header :user="user"/>
-        <div style="text-align: center; margin-top: 100px">Email</div>
+        <div class="text" style="text-align: center; margin-top: 100px">Email</div>
         <div style="text-align: center">
             <input type="text"  v-model="user"/>
         </div>
-        <div style="text-align: center">Mot de passe</div>
+        <div class="text" style="text-align: center">Mot de passe</div>
         <div style="text-align: center">
             <input type="text"  />
         </div>
-        <div style="text-align: center">Connectez vous en tant que :</div>
+        <div class="text" style="text-align: center">Connectez vous en tant que :</div>
         <div style="text-align: center">
             <button v-on:click="is_login = 'admin'">ADMIN</button>
             <button v-on:click="is_login = 'eleve'">ELEVE</button>
@@ -313,6 +313,7 @@
 </script>
 
 <style scoped>
+
     .see-list {
         background-color: #FFFFFF;
         width: 400px;
@@ -334,5 +335,10 @@
         align-items: center;
         justify-content: space-around;
         margin-top: 50px;
+    }
+    .text {
+        font-family: open sans,Arial,sans-serif;
+        line-height: 1.7em;
+        color: white;
     }
 </style>

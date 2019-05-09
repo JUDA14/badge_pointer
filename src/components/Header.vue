@@ -1,5 +1,5 @@
-<template>
-    <div id="header">
+<template >
+    <div id="header" >
         <h1 class="text"><span style="color:#e03049;">U</span><span class="text">BADGE</span></h1>
         <div class="menu text">
             <div>{{user}}</div>

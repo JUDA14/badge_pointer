@@ -81,7 +81,10 @@
 
 
     <div v-if="is_login == null" style="align-items: center; width : 300px; padding">
+        <div style="padding: 35px; " >
         <Header :user="user"/>
+        </div>
+
         <div class="text" style="text-align: center; margin-top: 100px; margin: 15px">Email</div>
         <div style="text-align: center; padding-horizontal: 50px" >
             <b-input type="text"  v-model="user"/>
@@ -90,7 +93,7 @@
         <div style="text-align: center">
             <b-input type="text"  />
         </div>
-        <div class="text" style="text-align: center; margin-top: 20px; margin-bottom: 15px">Connectez vous en tant que :</div>
+        <div class="text" style="text-align: center; margin-top: 40px; margin-bottom: 15px">Connectez vous en tant que :</div>
         <div style="text-align: center">
             <b-button v-on:click="is_login = 'admin' " variant ='primary' style="margin-right: 10px">ADMIN</b-button>
             <b-button v-on:click="is_login = 'eleve'" variant ='primary' style="margin-left: 10px">ELEVE</b-button>

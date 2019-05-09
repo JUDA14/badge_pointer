@@ -2,6 +2,9 @@
 <div style="width: 100%;height: 110%; background-color: #110230!important; align-items: center;justify-content: center; display: flex; width: 100%">
     <div v-if="is_login == 'admin'" >
         <div style= "width: 100%; justify-content: flex-end; display: flex">
+             <b-button style="margin-right: 20px" v-on:click="nav = 'home'" variant='primary' v-if="nav == 'classe'">
+                    <span class="text" >Retour</span>
+                </b-button>
             <b-button variant="danger" @click="is_login = null"  >
                 <span class="text" >Deconnexion</span>
             </b-button>
@@ -30,8 +33,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="nav == 'classe'">
-            <b-button v-on:click="nav = 'home'">Retour</b-button>
+        <div v-if="nav == 'classe'" style=" width: 100%">
             <div>
                 <h1 class="text">CLASSE {{label_classe}}</h1>
                 <h3 class="text">DATE : 10/05/2019</h3>

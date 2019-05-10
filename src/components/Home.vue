@@ -279,6 +279,7 @@
         methods: {
             sendPdf () {
                 fetch('http://localhost:3001/registration')
+                this.$toasted.success('PDF envoyé!', {position: 'bottom-left', duration: 3000})
             },
             addEntry () {
                 if (this.entries_new.length !== 0) {
@@ -288,6 +289,7 @@
 
                     this.entries_new.shift()
                 }
+                this.$toasted.info('Un élève est arrivé.', {position: 'bottom-left', duration: 3000})
 
             },
             addDepart () {
@@ -295,6 +297,7 @@
 
                     this.entries[this.entries.length - 1].heure_depart = new Date(Date.now())
                 }
+                this.$toasted.info('Un élève est parti.', {position: 'bottom-left', duration: 3000})
             },
             getHourFromDate (date) {
                 return `${new Date(date).getHours()}h${new Date(date).getMinutes().toString().padStart(2, '0')}`
@@ -328,6 +331,7 @@
 
                    }
                 }
+                this.$toasted.success('Modification enregistrée', {position: 'bottom-left', duration: 3000})
                 this.$modal.hide('edit-heures');
             },
         }

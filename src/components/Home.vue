@@ -34,8 +34,8 @@
                     <b-button variant="success" @click="sendPdf()">Envoyer le PDF</b-button>
                 </div>
             </div>
-            <div style=" border-width: 15px; border-color: red; ">
-                <table class="text">
+            <div style="display:flex;justify-content:center;border-width: 15px; border-color: red; ">
+                <table class="text" style="width: 80%;margin-top: 30px;">
                     <thead>
                     <tr>
                         <th >Nom</th>

@@ -256,18 +256,7 @@
                         isArrived: true,
                         variant_color_arrive: "red",
                         variant_color_depart: "red"
-                    },
-                    {
-                        id: 10,
-                        nom: 'Doe',
-                        prenom: 'John',
-                        heure_arrive: null,
-                        heure_depart: null,
-                        isArrived: true,
-                        variant_color_arrive: "red",
-                        variant_color_depart: "red"
                     }
-
                 ]
 
             }

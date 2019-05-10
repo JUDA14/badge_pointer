@@ -32,7 +32,8 @@ export default {
             return "2019-05-08T09:00"
         },
         sortedEntries () {
-            const sortedEntries = this.entries.sort(function(x, y) { return x.isArrived - y.isArrived })
+            const entriesToSort = this.entries.slice()
+            const sortedEntries = entriesToSort.sort(function(x, y) { return x.isArrived - y.isArrived })
             return sortedEntries.filter((entry) => !entry.isArrived || entry.heure_arrive > this.heureLimite) 
         }
     },
@@ -50,7 +51,6 @@ export default {
 </script>
 
 <style scoped>
-
     .today {
         background-color: #FFFFFF;
         width: 400px;
@@ -66,6 +66,4 @@ export default {
         font-size: 24px;
         padding-top: 20px;
     }
-
-
 </style>

@@ -1,7 +1,15 @@
 <template >
-    <div id="header" >
+    <div id="header">
         <h1 class="text"><span style="color:#e03049;">U</span><span class="text">BADGE</span></h1>
-        <div v-if="login !== true" class="menu text">
+        <div v-if="login === 'admin'">
+            <b-button style="margin-right: 20px" @click="$emit('back')" variant='primary' v-if="nav == 'classe'">
+                <span class="text" >Retour</span>
+            </b-button>
+            <b-button variant="danger" @click="$emit('disconnect')"  >
+                <span class="text" >Deconnexion</span>
+            </b-button>
+        </div>
+        <div v-if="login !== true && user && user !== ''" class="menu text">
             <div>{{user}}</div>
         </div>
     </div>
@@ -9,7 +17,7 @@
 
 <script>
 export default {
-    props: ['user', 'login'],
+    props: ['user', 'nav', 'login'],
 
 
 }
@@ -19,6 +27,10 @@ export default {
 #header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    justify-self: center;
+    margin: 0 auto;
 }
 
 #header h1 {

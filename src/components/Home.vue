@@ -1,15 +1,7 @@
 <template>
-<div style="width: 100%;height: 110%; background-color: #110230!important; align-items: center;justify-content: center; display: flex; width: 100%">
-    <div v-if="is_login == 'admin'" >
-        <div style= "width: 100%; justify-content: flex-end; display: flex">
-             <b-button style="margin-right: 20px" v-on:click="nav = 'home'" variant='primary' v-if="nav == 'classe'">
-                    <span class="text" >Retour</span>
-                </b-button>
-            <b-button variant="danger" @click="is_login = null"  >
-                <span class="text" >Deconnexion</span>
-            </b-button>
-        </div>
-        <Header :user="user"/>
+<div style="width: 100%;height: 100%; background-color: #110230!important; align-items: center;justify-content: center; display: flex; width: 100%">
+    <div style="width: 100%;" v-if="is_login == 'admin'" >
+        <Header @back="nav = 'home'" :nav="nav" :login="is_login" @disconnect="is_login = null" :user="user"/>
 
         <div id="dashboard" v-if="nav == 'home'">
             <Dashboard :entries="entries" />
@@ -97,7 +89,7 @@
 
         <div class="text" style="text-align: center; margin-top: 100px; margin: 15px">Email</div>
         <div style="text-align: center; padding-horizontal: 50px" >
-            <b-input type="text"  v-model="user"/>
+            <b-input type="text" v-model="user"/>
         </div>
         <div class="text" style="text-align: center; margin: 15px">Mot de passe</div>
         <div style="text-align: center">
@@ -355,8 +347,9 @@
         padding-top: 20px;
     }
     #dashboard {
-        width: 100%;
+        width: 80%;
         height: 80%;
+        margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: space-around;

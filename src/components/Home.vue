@@ -6,18 +6,19 @@
         <div id="dashboard" v-if="nav == 'home'">
             <Dashboard :entries="entries" />
             <div class="see-list">
-                <div class="see-list-header" style="font-weight:bold;">Voir liste</div>
+                <div class="see-list-header" style="font-weight:bold; font-color: white">Voir liste</div>
                 <div>
                     <table style="width: 100%;margin-top: 20px;">
                         <thead>
+                            
                         <tr>
                             <th>Classe</th>
                             <th>Nombre présent</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="classe in classes" :key="classe.id">
-                            <td><a @click="nav = 'classe'; label_classe=classe.label">{{classe.label}}</a></td>
+                        <tr v-for="classe in classes" :key="classe.id" >
+                            <td><b-button variant="primary" size="sm" @click="nav = 'classe'; label_classe=classe.label">{{classe.label}}</b-button></td>
                             <td>{{classe.present}}</td>
                         </tr>
                         </tbody>
@@ -29,9 +30,11 @@
             <div>
                 <h1 class="text">CLASSE {{label_classe}}</h1>
                 <h3 class="text">DATE : 10/05/2019</h3>
-                <b-button @click="sendPdf()">Envoyer le PDF</b-button>
+                <div style="margin: 20px">
+                    <b-button variant="success" @click="sendPdf()">Envoyer le PDF</b-button>
+                </div>
             </div>
-            <div style="margin-left: auto; margin-right: auto; width: 400px; ">
+            <div style=" border-width: 15px; border-color: red; ">
                 <table class="text">
                     <thead>
                     <tr>
@@ -48,22 +51,24 @@
                             <td :style="{color: entry.variant_color_arrive}">{{ entry.heure_arrive ? getHourFromDate(entry.heure_arrive) : '' }}</td>
                             <td :style="{color: entry.variant_color_depart}">{{ entry.heure_depart ? getHourFromDate(entry.heure_depart) : '' }}</td>
                             <td>
-                                <b-button v-on:click="openModal(entry)">Modifier</b-button></td>
+                                <b-button v-on:click="openModal(entry)" variant="outline-primary">Modifier</b-button></td>
                         </tr>
                     </tbody>
                 </table>
 
                 <modal name="edit-heures" >
-                    <div style="text-align: center; margin-top: 50px">Heure d'arrivée</div>
-                    <div style="text-align: center">
-                        <b-input type="datetime-local" v-model=form_modal.heure_arrive />
-                    </div>
-                    <div style="text-align: center">Heure de départ</div>
-                    <div style="text-align: center">
-                        <b-input type="datetime-local" v-model=form_modal.heure_depart />
-                    </div>
-                    <div style="text-align: center; margin-top: 10px">
-                        <b-button v-on:click="saveEdit(form_modal.id)">Sauvegarder</b-button>
+                    <div style="justify-content: center">
+                        <div style="text-align: center; margin-top: 30px; margin-bottom: 15px">Heure d'arrivée</div>
+                        <div style="text-align: center; width: 80%; margin-left: 10%">
+                            <b-input type="datetime-local" v-model=form_modal.heure_arrive />
+                        </div>
+                        <div style="text-align: center; margin-top: 30px; margin-bottom: 15px">Heure de départ</div>
+                        <div style="text-align: center; width: 80%; margin-left: 10%">
+                            <b-input type="datetime-local" v-model=form_modal.heure_depart />
+                        </div>
+                        <div style="text-align: center; margin-top: 10px">
+                            <b-button style="margin-top: 20px; margin-bottom: 50px" v-on:click="saveEdit(form_modal.id)" variant="success">Sauvegarder</b-button>
+                        </div>
                     </div>
                 </modal>
             </div>
@@ -333,12 +338,12 @@
 <style scoped>
 
     .see-list {
-        background-color: #FFFFFF;
-        width: 400px;
+        background-color: rgba(255, 255, 255, 0.9);
+        width: 350px;
         height: 500px;
         border: 1px solid rgba(0, 0, 0, 0.3);
         box-shadow: 0px 2px 4px 0px #00000050;
-        border-radius: 15px;
+        border-radius: 5px;
         transform: scale(0.9);
     }
 

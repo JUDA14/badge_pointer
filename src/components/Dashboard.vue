@@ -3,15 +3,15 @@
         <div class="today-header" style="font-weight:bold;">Aujourd'hui</div>
         <div>
             <table style="width: 100%;margin-top: 20px;">
-                <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Heure d'arrivée</th>
-                    <th>Est arrivé ?</th>
-                </tr>
+                <thead style="padding: 20px;">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Heure d'arrivée</th>
+                        <th>Est arrivé ?</th>
+                    </tr>
                 </thead>
-                <tbody>
+                <tbody style="padding: 20px;">
                     <tr v-for="entry in sortedEntries" :key="entry.id">
                         <td>{{ entry.nom }}</td>
                         <td>{{ entry.prenom }}</td>
@@ -52,14 +52,14 @@ export default {
 
 <style scoped>
     .today {
-        background-color: #FFFFFF;
+
+        background-color: rgba(255, 255, 255, 0.9);
         width: 400px;
-        height: 400px;
+        height: 500px;
         border: 1px solid rgba(0, 0, 0, 0.3);
         box-shadow: 0px 2px 4px 0px #00000050;
-        border-radius: 15px;
-        transform: scale(1.1);
-        overflow: auto;
+        border-radius: 5px;
+        transform: scale(0.9);
     }
 
     .today-header {

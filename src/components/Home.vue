@@ -81,7 +81,9 @@
             </b-button>
         </div>
         <Header :user="user"/>
-        <Eleve />
+        <div style="background-color: white; padding: 20px; border-radius: 5px">
+            <Eleve />
+        </div>
 
     </div>
 

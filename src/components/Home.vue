@@ -65,16 +65,18 @@
                 </table>
 
                 <modal name="edit-heures" >
-                    <div style="text-align: center; margin-top: 50px">Heure d'arrivée</div>
-                    <div style="text-align: center">
-                        <b-input type="datetime-local" v-model=form_modal.heure_arrive />
-                    </div>
-                    <div style="text-align: center">Heure de départ</div>
-                    <div style="text-align: center">
-                        <b-input type="datetime-local" v-model=form_modal.heure_depart />
-                    </div>
-                    <div style="text-align: center; margin-top: 10px">
-                        <b-button v-on:click="saveEdit(form_modal.id)" variant="success">Sauvegarder</b-button>
+                    <div style="justify-content: center">
+                        <div style="text-align: center; margin-top: 30px; margin-bottom: 15px">Heure d'arrivée</div>
+                        <div style="text-align: center; width: 80%; margin-left: 10%">
+                            <b-input type="datetime-local" v-model=form_modal.heure_arrive />
+                        </div>
+                        <div style="text-align: center; margin-top: 30px; margin-bottom: 15px">Heure de départ</div>
+                        <div style="text-align: center; width: 80%; margin-left: 10%">
+                            <b-input type="datetime-local" v-model=form_modal.heure_depart />
+                        </div>
+                        <div style="text-align: center; margin-top: 10px">
+                            <b-button style="margin-top: 20px; margin-bottom: 50px" v-on:click="saveEdit(form_modal.id)" variant="success">Sauvegarder</b-button>
+                        </div>
                     </div>
                 </modal>
             </div>
